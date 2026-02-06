@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class TimeConversion {
+
+    static String timeConversion(String s) {
+        String period = s.substring(s.length() - 2); // AM or PM
+        String time = s.substring(0, s.length() - 2); // hh:mm:ss
+
+        String[] parts = time.split(":");
+        int hour = Integer.parseInt(parts[0]);
+
+        if (period.equals("AM")) {
+            if (hour == 12) {
+                hour = 0;
+            }
+        } else { // PM
+            if (hour != 12) {
+                hour += 12;
+            }
+        }
+
+        return String.format("%02d:%s:%s", hour, parts[1], parts[2]);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        System.out.println(timeConversion(s));
+    }
+}
